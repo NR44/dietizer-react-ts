@@ -5,41 +5,50 @@ const PatientStatus: React.FunctionComponent = () => {
   const [isVented, setIsVented] = useState(true);
   const [hasTrauma, setHasTrauma] = useState(true);
 
-  function handleVentChange(e: any) {
-    setIsVented(e.target.value === "no");
-  }
-
-  function handleTraumaChange(e: any) {
-    setHasTrauma(e.target.value === "no");
+  function handleInputChange(e: any) {
+    if (e.target.name === "vent") {
+      setIsVented(!e.target.checked);
+      
+    } else {
+      setHasTrauma(!e.target.checked);
+    }
   }
 
   return (
     <div>
       <label htmlFor="gender">Gender: </label>
-      <select id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
+      <div>
+        <input
+          name="gender"
+          id="male"
+          value="male"
+          type="radio" />
+        <label htmlFor="male">Male</label>
+        <input
+          name="gender"
+          value="female"
+          type="radio" />
+        <label htmlFor="female">Female</label>
+      </div>
       <label htmlFor="vent">Vent: </label>
-      <select id="vent" onChange={handleVentChange} defaultValue="no">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+      <input
+        name="vent"
+        id="vent"
+        type="checkbox"
+        onChange={handleInputChange} />
       <label htmlFor="trauma">Trauma: </label>
-      <select
+      <input
+        name="trauma"
         id="trauma"
-        onChange={handleTraumaChange}
+        type="checkbox"
+        onChange={handleInputChange}
         disabled={isVented}
-        defaultValue="no"
-      >
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+      />
       <label htmlFor="burns">Burns: </label>
-      <select id="burns" disabled={hasTrauma}>
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
+      <input
+        type="checkbox"
+        id="burns"
+        disabled={hasTrauma} />
     </div>
   );
 };
